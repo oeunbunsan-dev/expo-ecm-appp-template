@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { ProductType } from '../portion/ProductPortion';
 
 interface Props {
@@ -7,16 +7,25 @@ interface Props {
 };
 
 const ProductCard = ({ productObj, onProductCardTap }: Props) => {
-      // const { id, title, description, category, price, discountPercentage, rating, stock } = productObj;
+      const { id, name, description, category, basePrice } = productObj;
+
       return (
-            <TouchableOpacity onPress={() => onProductCardTap?.(productObj.id)} style={{ width: "100%", height: 250, backgroundColor: "yellow", borderRadius: 16 }}>
-                  <Text> ID : {productObj.id}</Text>
-                  <Text> Title : {productObj.title}</Text>
-                  <Text> Description : {productObj.description}</Text>
-                  <Text> Category : {productObj.category}</Text>
-                  <Text> price : {productObj.price}</Text>
+            <TouchableOpacity
+                  onPress={() => onProductCardTap?.(productObj.id)}
+                  style={styles.productCartContainer}
+            >
+                  <Text> Description : {description}</Text>
             </TouchableOpacity>
       )
-}
+};
+
+const styles = StyleSheet.create({
+      productCartContainer: {
+            width: "100%",
+            height: 200,
+            backgroundColor: 'red',
+            borderRadius: 16
+      }
+})
 
 export default ProductCard

@@ -1,5 +1,5 @@
 import { productService } from '@/shared/apis/services/product.service';
-import ErrorDialog from '@/shared/components/dialog/ErrorDialog';
+import ErrorDialog from '@/shared/components/common/dialog/ErrorDialog';
 import { useDialog } from '@/shared/contexts/DialogContext';
 import { useLoading } from '@/shared/contexts/LoadingContext';
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import ProductPortion from '../portion/ProductPortion';
 
 const ProductView = () => {
-      const [products, setProducts] = useState(null);
+      const [products, setProducts] : any = useState(null);
 
       const { openDialog } = useDialog();
       const { startLoading, dismissLoading } = useLoading();
@@ -21,7 +21,7 @@ const ProductView = () => {
                   startLoading();
                   const res = await productService.getAllProducts();
 
-                  setProducts(res?.products);
+                  setProducts(res?.data);
                   
             } catch (error: any) {
                   const errorMessage = error?.message;

@@ -8,44 +8,62 @@ export interface Dimensions {
       depth: number;
 }
 
-export interface Review {
-      rating: number;
-      comment: string;
-      date: string;
-      reviewerName: string;
-      reviewerEmail: string;
+
+
+export interface StoreType {
+      id: string;
+      name: string;
+      slug: string;
+      logo: string | null;
 }
 
-export interface MetaData {
-      createdAt: string;
-      updatedAt: string;
-      barcode: string;
-      qrCode: string;
+export interface BrandType {
+      id: string;
+      name: string;
+      slug: string;
+      logo: string | null;
+}
+
+export interface CategoryType {
+      id: string;
+      name: string;
+      slug: string;
+}
+
+export interface InventoryType {
+      quantity: number;
+      reservedQuantity: number;
 }
 
 export interface ProductType {
-      id: number;
-      title: string;
+      id: string;
+      storeId: string;
+      brandId: string;
+      categoryId: string;
+      name: string;
+      slug: string;
       description: string;
-      category: string;
-      price: number;
-      discountPercentage: number;
-      rating: number;
-      stock: number;
-      tags: string[];
-      brand: string;
+      shortDescription: string;
       sku: string;
-      weight: number;
-      dimensions: Dimensions;
-      warrantyInformation: string;
-      shippingInformation: string;
-      availabilityStatus: string;
-      reviews: Review[];
-      returnPolicy: string;
-      minimumOrderQuantity: number;
-      meta: MetaData;
-      images: string[];
-      thumbnail: string;
+      basePrice: string;
+      comparePrice: string;
+      costPrice: string | null;
+      isFeatured: boolean;
+      isActive: boolean;
+      tags: any[];
+      status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED' | string;
+      viewsCount: number;
+      salesCount: number;
+      ratingAvg: string;
+      ratingCount: number;
+      createdAt: string; // ISO Date String
+      updatedAt: string;
+      store: StoreType;
+      brand: BrandType;
+      category: CategoryType;
+      images: any[];
+      variants: any[];
+      inventory: InventoryType[];
 }
 
 

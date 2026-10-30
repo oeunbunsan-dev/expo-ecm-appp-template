@@ -25,7 +25,13 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
   return (
     <DialogContext.Provider value={{ openDialog, closeDialog }}>
       {children}
-      <Modal transparent visible={visible} animationType="fade">
+      <Modal 
+        transparent 
+        visible={visible} 
+        statusBarTranslucent 
+        animationType="fade"
+        onRequestClose={closeDialog}
+      >
         <View style={styles.overlay}>
           {dialogContent}
         </View>
