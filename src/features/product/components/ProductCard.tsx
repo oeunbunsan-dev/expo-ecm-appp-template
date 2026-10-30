@@ -1,20 +1,31 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image } from "expo-image";
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ProductType } from '../portion/ProductPortion';
 
 interface Props {
-      productObj: ProductType;
+      productObj?: ProductType;
+
       onProductCardTap?: (item?: any) => any;
 };
 
 const ProductCard = ({ productObj, onProductCardTap }: Props) => {
-      const { id, name, description, category, basePrice } = productObj;
 
       return (
             <TouchableOpacity
-                  onPress={() => onProductCardTap?.(productObj.id)}
+                  onPress={() => onProductCardTap?.(productObj?.id)}
                   style={styles.productCartContainer}
             >
-                  <Text> Description : {description}</Text>
+                  <View style={styles.imageWrapper}>
+                        <Image
+                              style={{ position: "absolute", flex: 1, width : "100%", height : "100%" }}
+                              source={productObj?.images[0]}
+                              contentFit="contain"
+                              cachePolicy={'memory-disk'}
+                              transition={150}
+
+                        />
+                  </View>
+
             </TouchableOpacity>
       )
 };
@@ -23,9 +34,16 @@ const styles = StyleSheet.create({
       productCartContainer: {
             width: "100%",
             height: 200,
-            backgroundColor: 'red',
-            borderRadius: 16
+            borderRadius: 16,
+            position: "relative"
+      },
+
+      imageWrapper: {
+            width: "100%",
+            height: 300,
+            position: "relative"
       }
+
 })
 
 export default ProductCard

@@ -4,12 +4,15 @@ import TextureJournal from '../components/TextureJournal'
 import CategoryPortion from '../portion/CategoryPortion'
 import HeroPortion from '../portion/HeroPortion'
 
+import ProductView from '@/features/product/view/ProductView'
 import { useRouter } from 'expo-router'
+import { Text, TouchableOpacity } from 'react-native'
 
 
 const DiscoveryFeedView = () => {
   const router = useRouter();
-  
+
+
   return (
     <>
       <AppHeader />
@@ -17,6 +20,14 @@ const DiscoveryFeedView = () => {
       <CategoryPortion />
       <TextureJournal />
       <AppLottieView name="deliveryMan" />
+
+      <TouchableOpacity onPress={() => {
+        router.push("/scan-qr")
+      }}>
+        <Text>Go to Scan</Text>
+      </TouchableOpacity>
+
+      <ProductView />
     </>
   )
 }

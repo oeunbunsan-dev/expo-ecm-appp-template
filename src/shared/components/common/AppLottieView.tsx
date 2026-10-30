@@ -1,6 +1,6 @@
 import { lottieManager, LottieName } from '@/shared/configs/lottie';
 import LottieView from 'lottie-react-native';
-import { processColor, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { Platform, processColor, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import type { AnimationObject } from 'lottie-react-native';
 import { useMemo } from 'react';
 
@@ -87,12 +87,24 @@ const AppLottieView = ({
     () => color ? recolorAnimation(lottieSource, color) : lottieSource,
     [color, lottieSource],
   );
+  const componentStyle = StyleSheet.flatten([styles.defaultStyle, style]) ?? styles.defaultStyle;
+  const webStyle = Platform.OS === 'web'
+    ? {
+      width: typeof componentStyle.width === 'string' || typeof componentStyle.width === 'number'
+        ? componentStyle.width
+        : undefined,
+      height: typeof componentStyle.height === 'string' || typeof componentStyle.height === 'number'
+        ? componentStyle.height
+        : undefined,
+    }
+    : undefined;
 
   return (
     <LottieView
       source={source}
       colorFilters={colorFilters}
-      style={[styles.defaultStyle, style]}
+      style={componentStyle}
+      webStyle={webStyle}
       autoPlay={autoPlay}
       loop={loop}
     />
